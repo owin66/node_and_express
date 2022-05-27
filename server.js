@@ -1,13 +1,22 @@
 const express = require('express');
+const path = require('path')
 
 const app = express();
 
 const PORT = 3000;
+
+const createPath = (page) => path.resolve(__dirname, 'views', `${page}.html`)
 
 app.listen(PORT, (error) => {
     error ? console.log(error) : console.log(`listening port ${PORT}`);
 });
 
 app.get('/', (req, res) => {
-    res.send('<h1>Hello world</h1>')
+    res.sendFile(createPath('index'))
+})
+app.get('/contacts', (req, res) => {
+    res.sendFile(createPath('contacts'))
+})
+app.use((req,res)=>{
+    res.sendFile(createPath('error'))
 })
