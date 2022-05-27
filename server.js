@@ -18,5 +18,7 @@ app.get('/contacts', (req, res) => {
     res.sendFile(createPath('contacts'))
 })
 app.use((req,res)=>{
-    res.sendFile(createPath('error'))
+    res
+        .status(404)
+        .sendFile(createPath('error'))
 })
